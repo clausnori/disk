@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>ClausDisk</title>
+<style>
+body { font-family: sans-serif; padding: 20px; max-width: 900px; margin: auto; }
+h1 { text-align: center; }
+.card { border: 1px solid #ddd; padding: 15px; border-radius: 8px; text-align: center; margin-bottom: 10px; }
+input, button { padding: 5px 10px; }
+.usage { margin-bottom: 20px; text-align: center; }
+</style>
+</head>
+<body>
+
+<h1>Мой Диск</h1>
+
+<div class="usage">
+<b>Диск:</b> Занято {{ usage.used }}MB / {{ usage.total }}MB (Свободно {{ usage.free }}MB)
+</div>
+
+<form action="/create_folder" method="POST">
+<input type="text" name="folder_name" placeholder="Имя папки" required>
+<button type="submit">Создать папку</button>
+</form>
+
+<hr>
+
+{% for folder in folders %}
+<div class="card">
+<b>{{ folder }}</b><br>
+<a href="{{ url_for('view_folder', folder=folder) }}">Открыть папку</a>
+</div>
+{% endfor %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<ul>
+{% for category, message in messages %}
+<li style="color: {{ 'green' if category == 'success' else 'red' }}">{{ message }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+</body>
+</html>
