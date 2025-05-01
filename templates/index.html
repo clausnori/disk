@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><title>Мой Диск</title><style>
+body{font-family:sans-serif;max-width:800px;margin:auto;padding:20px;}
+h1{text-align:center;} .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:15px;}
+.card{border:1px solid #ddd;border-radius:8px;padding:20px;text-align:center;}
+</style></head>
+<body>
+<h1>Disk by ClausNori</h1>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 text-white text-center">
+  <div class="bg-blue-500 rounded-lg p-4 shadow hover:shadow-md transition">
+    <div class="text-xl font-bold">{{ stats.folders }}</div>
+    <div class="text-sm">Папок</div>
+  </div>
+  <div class="bg-indigo-500 rounded-lg p-4 shadow hover:shadow-md transition">
+    <div class="text-xl font-bold">{{ stats.files }}</div>
+    <div class="text-sm">Файлов</div>
+  </div>
+  <div class="bg-green-500 rounded-lg p-4 shadow hover:shadow-md transition">
+    <div class="text-xl font-bold">{{ usage.used }} MB</div>
+    <div class="text-sm">Использовано</div>
+  </div>
+  <div class="bg-teal-500 rounded-lg p-4 shadow hover:shadow-md transition">
+    <div class="text-xl font-bold">{{ usage.free }} MB</div>
+    <div class="text-sm">Свободно</div>
+  </div>
+</div>
+<form action="{{ url_for('create_folder') }}" method="POST">
+<input name="folder_name" placeholder="Имя папки" required><button>Создать папку</button></form><hr>
+<div class="grid">
+{% for folder in folders %}
+<div class="card">
+<a href="{{ url_for('view_folder', folder=folder) }}"><b>{{ folder }}</b></a>
+</div>{% endfor %}</div>
+</body></html>
