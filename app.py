@@ -4,7 +4,7 @@ import shutil
 from math import ceil
 
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'
+app.secret_key = 'gggg'
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'bmp', 'pdf', 'txt', 'docx', 'xlsx', 'zip'}
 
